@@ -65,10 +65,10 @@ function fetchAllOrders(){
 		complete: function(data) {
 			var maxCount = 0;
 			var maxItem = "";
-			for(var item in itemCount){
+			for(var i=0; i< itemCount.length;i++){
 				if(item.count  > maxCount) {
-					maxCount = item.count;
-					maxItem = item.name;
+					maxCount = itemCount[i].count;
+					maxItem = itemCount[i].name;
 				}
 			}
 			$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
