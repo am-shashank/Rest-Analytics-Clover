@@ -28,12 +28,15 @@ $(document).ready(function(){
 window.onLoginWindowClose = function(btn) {
 	console.log("Window closed");
 	var cookies = str_obj(document.cookie);
-	if(cookies.access_token == null){
-		$("#"+btn).text($("#"+btn).attr("dtext"));
-		return;
+	if(cookies.access_token != null){
+		$.ajax({
+			url: '/get.php?type=employees/JD3K5WKC4GKCJ&token='+cookies.access_token
+			type: 'GET',
+			success: function(data) {
+				$("#login-btn").text(data.name);
+			}
+		});
 	}
-	getNumberOfCustomers();
-	
 };
 window.onbeforeunload = function() {
 	document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
