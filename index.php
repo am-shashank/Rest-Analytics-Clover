@@ -23,7 +23,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="https://www.facebook.com/am.seshank?_rdr=p">Shashank A M</a></li>
+					<li><a href="#" id="login-btn">Login</a></li>
 				</ul>
 			</div>
 		</div>
@@ -44,7 +44,7 @@
 					N/A
 				</div>
 			</div>
-			<button class="btn btn-default" id="get-uvisitors">Get the number of customers</button>
+			<button class="btn btn-default" id="get-uvisitors" dtext="Get the number of customers">Get the number of customers</button>
 		</div>
 		<div class="tab-pane fade" id="orders1">
 			<div class="panel panel-default">
@@ -53,7 +53,7 @@
 					N/A
 				</div>
 			</div>
-			<button class="btn btn-default" id="get-orders1">Get data</button>
+			<button class="btn btn-default" id="get-orders1" dtext="Get data">Get data</button>
 		</div>
 		<div class="tab-pane fade" id="orders2">
 			<div class="panel panel-default">
@@ -62,7 +62,7 @@
 					N/A
 				</div>
 			</div>
-			<button class="btn btn-default" id="get-orders2">Get data</button>
+			<button class="btn btn-default" id="get-orders2" dtext="Get data">Get data</button>
 		</div>
 	</div>
 </body>

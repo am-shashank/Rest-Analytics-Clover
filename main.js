@@ -1,8 +1,13 @@
 $(document).ready(function(){
 	$("#main-tabs li:first > a").trigger("click");
+	$("#login-btn").click(function(){
+		var win = window.open('https://clover.com/oauth/authorize?response_type=token&client_id=EFQM9E0WY52SM&redirect_uri=http%3A%2F%2Frest-analytics-clover.herokuapp.com%2Fredirect.php%3Fbtn%3Dget-uvisitors','', 'width=1000');
+	});
 	$("#get-uvisitors").click(function(){
+		var cookies = str_obj(document.cookie);
+		if(cookies.access_token == null) return;
 		$.ajax({
-			url: '/get.php?type=customers',
+			url: '/get.php?type=customers&token='+cookies.access_token,
 			type:'GET',
 			beforeSend: function(request){
 				$("#mask").show();
@@ -13,8 +18,33 @@ $(document).ready(function(){
 				$("#mask").fadeOut('slow',function(){
 					$("#mask").remove();
 				});
-				fetchAllOrders();
+				//fetchAllOrders();
 			}
 		});
 	});
 });
+
+
+window.onLoginWindowClose = function(btn) {
+	console.log("Window closed");
+	var cookies = str_obj(document.cookie);
+	if(cookies.access_token == null){
+		$("#"+btn).text($("#"+btn).attr("dtext"));
+		return;
+	}
+	getNumberOfCustomers();
+	
+};
+window.onbeforeunload = function() {
+	document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+function str_obj(str) {
+	str = str.split(';');
+	var result = {};
+	for (var i = 0; i < str.length; i++) {
+		var cur = str[i].trim().split('=');
+		result[cur[0]] = cur[1];
+	}
+	return result;
+}

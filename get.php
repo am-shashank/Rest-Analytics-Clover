@@ -1,6 +1,6 @@
 <?php
-$apiToken = "8165606b-46d1-2651-1be3-ef3ce301c484";
 $type = $_GET["type"];
+$token = $_GET["token"];
 $query = $_GET["query"];
 $url ="";
 if($query)
