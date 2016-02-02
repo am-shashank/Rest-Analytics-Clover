@@ -46,7 +46,7 @@ window.onbeforeunload = function() {
 };
 
 
-var itemCount = Array();
+var itemCount = new Object();
 var maxItem = "";
 var maxCount = 0;
 function fetchAllOrders(){
@@ -105,7 +105,7 @@ function fetchLineItems(orderId){
 			        // console.log("itemID:" + itemId);
 			        // console.log("itemName:" + itemName);
 				    if (itemName in itemCount) {		
-				    	itemCount[itemName]++;
+				    	itemCount[itemName] = itemCount[itemName] + 1;
 				    } else {
 			            itemCount[itemName] = 1;
 				    }
