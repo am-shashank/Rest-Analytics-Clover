@@ -56,8 +56,8 @@ function fetchAllOrders(){
 			$("#mask").show();
 		},
 		success: function(orders){
-			for(var i=0; i<orders["elements"].length;i++){
-				var orderid = orders["elements"][i]["id"];
+			for(var i=0; i<orders.elements.length;i++){
+				var orderid = orders.elements[i].id;
 				// fetch line items for every order
 				fetchLineItems(orderid);
 			}
@@ -91,9 +91,9 @@ function fetchLineItems(orderId){
 			$("#loader").show();
 		},
 		success: function(lineItems){
-			for(var i=0;i<lineItems["elements"].length;i++){
-				var itemId = lineItems["elements"][i]["id"];
-				var itemName = lineItems["elements"][i]["name"];
+			for(var i=0;i<lineItems.elements.length;i++){
+				var itemId = lineItems.elements[i].id;
+				var itemName = lineItems.elements[i].name;
 				if ($.inArray(itemId,itemCount)>=0) {
 				    itemCount[itemId].count ++;
 				} else {
