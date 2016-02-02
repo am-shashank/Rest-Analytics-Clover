@@ -34,16 +34,17 @@
 		<li class=""><a href="#orders2" data-toggle="tab" aria-expanded="false">Orders (Time)</a></li>
 	</ul>
 	<div id="myTabContent" class="tab-content">
-		<div class="tab-pane fade" id="uvisitors">
-			<div class="tab-pane fade active in" id="uvisitors">
-				<div class="panel panel-default">
-					<div class="panel-heading">No. of Customers</div>
-					<div class="panel-body">
-						N/A
-					</div>
+		<div id="mask">
+			<img src="https://d13yacurqjgara.cloudfront.net/users/1275/screenshots/1198509/plus.gif" id="loader">
+		</div>
+		<div class="tab-pane fade active in" id="customers">
+			<div class="panel panel-default">
+				<div class="panel-heading">No. of Customers</div>
+				<div class="panel-body">
+					N/A
 				</div>
-				<button class="btn btn-default" id="get-uvisitors">Get the number of customers</button>
 			</div>
+			<button class="btn btn-default" id="get-uvisitors">Get the number of customers</button>
 		</div>
 		<div class="tab-pane fade" id="orders1">
 			<div class="panel panel-default">

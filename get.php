@@ -1,8 +1,19 @@
 <?php
 $apiToken = "8165606b-46d1-2651-1be3-ef3ce301c484";
+$type = $_GET["type"];
+$query = $_GET["query"];
+$url ="";
+if($query)
+{
+	$url = "https://api.clover.com/v3/merchants/SK5ZGG60CD168/".$type."&".urldecode($query);
+}
+else
+{
+	$url = "https://api.clover.com/v3/merchants/SK5ZGG60CD168/".$type;
+}
 
 header("Content-type: application/json");
-$ch = curl_init("https://api.clover.com/v3/merchants/SK5ZGG60CD168/".$_GET["type"]);
+$ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER,
 	array(
