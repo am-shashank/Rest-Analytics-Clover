@@ -95,21 +95,19 @@ function fetchLineItems(orderId){
 			$("#loader").show();
 		},
 		success: function(lineItems){
-			try {
+			if("elements" in lineItems) {
 				for(var i=0;i<lineItems.elements.length;i++)
 		        {
 				    var itemId = lineItems.elements[i].id;
 				    var itemName = lineItems.elements[i].name;
-			        console.log("itemID:" + itemId);
-			        console.log("itemName:" + itemName);
+			        // console.log("itemID:" + itemId);
+			        // console.log("itemName:" + itemName);
 				    if (itemId in itemCount) {		
 				    	itemCount[itemId].count++;
 				    } else {
 			            itemCount[itemId] = {count: 1, name: itemName};
 				    }
 				} 
-			} catch(err) {
-				console.log(err);
 			}
 		}
 	});
