@@ -65,11 +65,11 @@ function fetchAllOrders(){
 		complete: function(data) {
 			var maxCount = 0;
 			var maxItem = "";
-			for(var i=0; i< itemCount.length;i++){
-				if(itemCount[i].count>maxCount) {
-					console.log(itemCount[i].count+":"+itemCount[i].name);
-					maxCount = itemCount[i].count;
-					maxItem = itemCount[i].name;
+			for(var k in itemCount){
+				if(k.count>maxCount) {
+					console.log(k.count+":"+k.name);
+					maxCount = k.count;
+					maxItem = k.name;
 				}
 			}
 			$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
