@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$("#main-tabs li:first > a").trigger("click");
 	$("#login-btn").click(function(){
-		var win = window.open('https://clover.com/oauth/authorize?response_type=token&client_id=EFQM9E0WY52SM&redirect_uri=http%3A%2F%2Frest-analytics-clover.herokuapp.com%2Fredirect.php%3Fbtn%3Dget-uvisitors','', 'width=1000');
+		var win = window.open('https://clover.com/oauth/authorize?response_type=token&client_id=EFQM9E0WY52SM&redirect_uri=https%3A%2F%2Frest-analytics-clover.herokuapp.com%2Fredirect.php%3Fbtn%3Dget-uvisitors','', 'width=1000');
 	});
 	$("#get-uvisitors").click(function(){
 		var cookies = str_obj(document.cookie);
