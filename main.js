@@ -115,7 +115,8 @@ function fetchLineItems(orderId){
 				    	maxCount = itemCount[itemName];
 				    	maxItem = itemName;
 				    }
-				} 
+				}
+				console.log(maxItem); 
 			}
 		}
 	});
