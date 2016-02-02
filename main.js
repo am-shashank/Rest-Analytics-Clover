@@ -103,20 +103,20 @@ function fetchLineItems(orderId){
 				    // var itemId = lineItems.elements[i].id;
 				    var itemName = lineItems.elements[i].name;
 			        // console.log("itemID:" + itemId);
-			        console.log("itemName:" + itemName);
+			        // console.log("itemName:" + itemName);
 				    if (itemName in itemCount) {		
 				    	itemCount[itemName] = itemCount[itemName] + 1;
 				    } else {
 			            itemCount[itemName] = 1;
 				    }
-				    console.log(itemCount);
+				    // console.log(itemCount);
 				    // update the popular item
 				    if(itemCount[itemName] > maxCount) {
 				    	maxCount = itemCount[itemName];
 				    	maxItem = itemName;
 				    }
 				}
-				console.log(maxItem); 
+				console.log("MaxItem:" + maxItem); 
 			}
 		}
 	});
