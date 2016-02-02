@@ -51,7 +51,7 @@ var maxItem = "";
 var maxCount = 0;
 function fetchAllOrders(){
 	var cookies = str_obj(document.cookie);
-	$.ajax({
+	$.when($.ajax({
 		url: '/get.php?type=orders&token='+cookies.access_token,
 		type:'GET',
 		beforeSend: function(request){
@@ -63,12 +63,6 @@ function fetchAllOrders(){
 				// fetch line items for every order
 				fetchLineItems(orderid);
 			}
-			console.log("MaxItem: " + maxItem);
-			console.log("MaxItemCount: " + maxCount);
-			$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
-			$("#mask").fadeOut('slow',function(){
-				$("#mask").remove();
-			});
 		}
 		// complete: function(data) {
 		// 	// console.log(itemCount);
@@ -88,15 +82,14 @@ function fetchAllOrders(){
 		// 		$("#mask").remove();
 		// 	});
 		// }
-	}); 
-	// .done(function() {
-	// 	console.log("MaxItem: " + maxItem);
-	// 	console.log("MaxItemCount: " + maxCount);
-	// 	$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
-	// 	$("#mask").fadeOut('slow',function(){
-	// 		$("#mask").remove();
-	// 	});
-	// });
+	})).done(function() {
+		console.log("MaxItem: " + maxItem);
+		console.log("MaxItemCount: " + maxCount);
+		$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
+		$("#mask").fadeOut('slow',function(){
+			$("#mask").remove();
+		});
+	});
 	
 }
 
