@@ -66,7 +66,7 @@ function fetchAllOrders(){
 			var maxCount = 0;
 			var maxItem = "";
 			for(var i=0; i< itemCount.length;i++){
-				if(item.count  > maxCount) {
+				if(itemCount[i].count>maxCount) {
 					maxCount = itemCount[i].count;
 					maxItem = itemCount[i].name;
 				}
