@@ -100,20 +100,20 @@ function fetchLineItems(orderId){
 			if("elements" in lineItems) {
 				for(var i=0;i<lineItems.elements.length;i++)
 		        {
-				    var itemId = lineItems.elements[i].id;
+				    // var itemId = lineItems.elements[i].id;
 				    var itemName = lineItems.elements[i].name;
 			        // console.log("itemID:" + itemId);
 			        // console.log("itemName:" + itemName);
-				    if (itemId in itemCount) {		
-				    	itemCount[itemId].count++;
+				    if (itemName in itemCount) {		
+				    	itemCount[itemName]++;
 				    } else {
-			            itemCount[itemId] = {count: 1, name: itemName};
+			            itemCount[itemName] = 1;
 				    }
 
 				    // update the popular item
-				    if(itemCount[itemId].count > maxCount) {
-				    		maxCount = itemCount[itemId].count;
-				    		maxItem = itemCount[itemId].name;
+				    if(itemCount[itemName] > maxCount) {
+				    	maxCount = itemCount[itemName];
+				    	maxItem = itemName;
 				    }
 				} 
 			}
