@@ -18,10 +18,11 @@ $(document).ready(function(){
 				$("#mask").fadeOut('slow',function(){
 					$("#mask").remove();
 				});
-				//fetchAllOrders();
+				
 			}
 		});
 	});
+	$("#get-orders1").click(fetchAllOrders());
 });
 
 
@@ -41,6 +42,65 @@ window.onLoginWindowClose = function(btn) {
 window.onbeforeunload = function() {
 	document.cookie = 'access_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
+
+
+var itemCount = {};
+function fetchAllOrders(){
+	var cookies = str_obj(document.cookie);
+	$.ajax({
+		url: '/get.php?type=orders&token='+cookies.access_token,
+		type:'GET',
+		beforeSend: function(request){
+			$("#mask").show();
+		},
+		success: function(orders){
+			for(var order in orders["elements"]){
+				var orderid = order["id"];
+				// fetch line items for every order
+				fetchLineItems(orderid);
+			}
+		},
+		complete: function(data) {
+			var maxCount = 0;
+			var maxItem = "";
+			for(var item in itemCount){
+				if(item.count  > maxCount) {
+					maxCount = item.count;
+					maxItem = item.name;
+				}
+			}
+			$("#mask").fadeOut('slow',function(){
+				$("#mask").remove();
+			});
+		}
+	});
+	
+}
+
+function fetchLineItems(orderId){
+	var cookies = str_obj(document.cookie);
+	// update line count 
+	$.ajax({
+		url: '/get.php?type=orders/'+ orderId +'/line_items&token='+cookies.access_token,
+		type:'GET',
+		beforeSend: function(request){
+			$("#login-btn").hide();
+			$("#loader").show();
+		},
+		success: function(lineItems){
+			for(var lineItem in lineItems["elements"]){
+				var itemId = lineItem["id"];
+				var itemName = lineItem["name"];
+				if (itemId in lineItem) {
+				    itemCount[itemId].count ++;
+				} else {
+				    itemCount[itemId] = {count: 1, name: itemName};
+				}
+			}
+		}
+	});
+}
+
 
 function str_obj(str) {
 	str = str.split(';');
