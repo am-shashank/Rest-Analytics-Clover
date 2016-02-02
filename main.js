@@ -47,6 +47,8 @@ window.onbeforeunload = function() {
 
 
 var itemCount = Array();
+var maxItem = "";
+var maxCount = 0;
 function fetchAllOrders(){
 	var cookies = str_obj(document.cookie);
 	$.ajax({
@@ -66,15 +68,15 @@ function fetchAllOrders(){
 		},
 		complete: function(data) {
 			console.log(itemCount);
-			var maxCount = 0;
-			var maxItem = "";
-			for(var k in itemCount){
-				if(k.count>maxCount) {
-					console.log(k.count+":"+k.name);
-					maxCount = k.count;
-					maxItem = k.name;
-				}
-			}
+			// var maxCount = 0;
+			// var maxItem = "";
+			// for(var k in itemCount){
+			// 	if(k.count>maxCount) {
+			// 		console.log(k.count+":"+k.name);
+			// 		maxCount = k.count;
+			// 		maxItem = k.name;
+			// 	}
+			// }
 			$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
 			$("#mask").fadeOut('slow',function(){
 				$("#mask").remove();
@@ -106,6 +108,12 @@ function fetchLineItems(orderId){
 				    	itemCount[itemId].count++;
 				    } else {
 			            itemCount[itemId] = {count: 1, name: itemName};
+				    }
+
+				    // update the popular item
+				    if(itemCount[itemId].count > maxCount) {
+				    		maxCount = itemCount[itemId].count;
+				    		maxItem = itemCount[itemId].name;
 				    }
 				} 
 			}
