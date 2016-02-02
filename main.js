@@ -22,7 +22,9 @@ $(document).ready(function(){
 			}
 		});
 	});
-	$("#get-orders1").click(fetchAllOrders());
+	$("#get-orders1").click(function(){ 
+		fetchAllOrders(); 
+	});
 });
 
 
