@@ -82,7 +82,7 @@ function fetchAllOrders(){
 		// 		$("#mask").remove();
 		// 	});
 		// }
-	})).done(function() {
+	})).done(function(data) {
 		console.log("MaxItem: " + maxItem);
 		console.log("MaxItemCount: " + maxCount);
 		$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
