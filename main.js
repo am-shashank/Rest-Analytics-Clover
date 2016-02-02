@@ -46,7 +46,7 @@ window.onbeforeunload = function() {
 };
 
 
-var itemCount = {};
+var itemCount = Array();
 function fetchAllOrders(){
 	var cookies = str_obj(document.cookie);
 	$.ajax({
