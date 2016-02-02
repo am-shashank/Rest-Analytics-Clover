@@ -46,7 +46,7 @@ window.onbeforeunload = function() {
 };
 
 
-var itemCount = {};
+var itemCount = Array();
 function fetchAllOrders(){
 	var cookies = str_obj(document.cookie);
 	$.ajax({
@@ -67,6 +67,7 @@ function fetchAllOrders(){
 			var maxItem = "";
 			for(var i=0; i< itemCount.length;i++){
 				if(itemCount[i].count>maxCount) {
+					console.log(itemCount[i].count+":"+itemCount[i].name);
 					maxCount = itemCount[i].count;
 					maxItem = itemCount[i].name;
 				}
