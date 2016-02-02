@@ -61,8 +61,11 @@ function fetchAllOrders(){
 				// fetch line items for every order
 				fetchLineItems(orderid);
 			}
+			console.log("itemCount");
+			console.log(itemCount);
 		},
 		complete: function(data) {
+			console.log(itemCount);
 			var maxCount = 0;
 			var maxItem = "";
 			for(var k in itemCount){
