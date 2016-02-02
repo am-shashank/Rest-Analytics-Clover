@@ -14,7 +14,7 @@ $(document).ready(function(){
 			},
 			success: function(data)
 			{
-				$('#customers > .panel-body').text(data.elements.length);
+				$('#customers .panel-body').text(data.elements.length);
 				$("#mask").fadeOut('slow',function(){
 					$("#mask").remove();
 				});
