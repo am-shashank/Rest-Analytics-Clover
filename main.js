@@ -71,7 +71,7 @@ function fetchAllOrders(){
 					maxItem = item.name;
 				}
 			}
-			$('#orders1 .panel-body').text(data.elements.length);
+			$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
 			$("#mask").fadeOut('slow',function(){
 				$("#mask").remove();
 			});
@@ -95,7 +95,7 @@ function fetchLineItems(orderId){
 				var itemId = lineItems.elements[i].id;
 				var itemName = lineItems.elements[i].name;
 				if ($.inArray(itemId,itemCount)>=0) {
-				    itemCount[itemId].count ++;
+				    itemCount[itemId].count++;
 				} else {
 				    itemCount[itemId] = {count: 1, name: itemName};
 				}
