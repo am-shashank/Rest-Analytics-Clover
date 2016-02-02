@@ -30,7 +30,7 @@ window.onLoginWindowClose = function(btn) {
 	var cookies = str_obj(document.cookie);
 	if(cookies.access_token != null){
 		$.ajax({
-			url: '/get.php?type=employees/JD3K5WKC4GKCJ&token='+cookies.access_token
+			url: '/get.php?type=employees/JD3K5WKC4GKCJ&token='+cookies.access_token,
 			type: 'GET',
 			success: function(data) {
 				$("#login-btn").text(data.name);
