@@ -71,6 +71,7 @@ function fetchAllOrders(){
 					maxItem = item.name;
 				}
 			}
+			$('#orders1 .panel-body').text(data.elements.length);
 			$("#mask").fadeOut('slow',function(){
 				$("#mask").remove();
 			});
