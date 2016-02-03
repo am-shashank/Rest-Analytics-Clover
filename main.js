@@ -68,10 +68,12 @@ function fetchAllOrders(func){
 			$("#mask").show();
 		},
 		success: function(orders){
-			for(var i=0; i<orders.elements.length;i++){
-				var orderid = orders.elements[i].id;
-				// fetch line items for every order
-				func(orderid, i, orders.elements.length - 1);
+			if(elements in orders) {
+				for(var i=0; i<orders.elements.length;i++){
+					var orderid = orders.elements[i].id;
+					// fetch line items for every order
+					func(orderid, i, orders.elements.length - 1);
+				}
 			}
 
 		}
@@ -126,7 +128,6 @@ function fetchPopularLunch(orderId, i , len){
 				    	maxItem = itemName;
 				    }
 				}
-				// console.log("MaxItem:" + maxItem); 
 			}
 			if( ctr == maxCtr){
 				displayMaxLunch();
