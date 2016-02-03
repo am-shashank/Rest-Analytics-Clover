@@ -23,7 +23,10 @@ $(document).ready(function(){
 		});
 	});
 	$("#get-orders1").click(function(){ 
-		fetchAllOrders(); 
+		fetchAllOrders(fetchPopularLunch); 
+	});
+	$("#get-orders2").click(function(){ 
+		fetchAllOrders(fetchPopularCombo); 
 	});
 });
 
@@ -46,10 +49,17 @@ window.onbeforeunload = function() {
 };
 
 
-var itemCount = new Object();
-var maxItem = "";
+var itemCount = new Object(); // map between items and count
+var maxItem = "";	// most popular lunch item
 var maxCount = 0;
-function fetchAllOrders(){
+var bestCombo = ""; //most popular combo
+var popularComboMap = new Object(); // map between item pairs and count
+// variables to enforce synchronous calls
+var ctr; 
+var maxCtr;
+
+
+function fetchAllOrders(func){
 	var cookies = str_obj(document.cookie);
 	$.ajax({
 		url: '/get.php?type=orders&token='+cookies.access_token,
@@ -61,14 +71,14 @@ function fetchAllOrders(){
 			for(var i=0; i<orders.elements.length;i++){
 				var orderid = orders.elements[i].id;
 				// fetch line items for every order
-				fetchLineItems(orderid, i, orders.elements.length - 1);
+				func(orderid, i, orders.elements.length - 1);
 			}
 
 		}
 	});
 }
 
-function displayMax(){
+function displayMaxLunch(){
 	console.log("MaxItem: " + maxItem);
 	console.log("MaxItemCount: " + maxCount);
 	$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
@@ -76,9 +86,17 @@ function displayMax(){
 		$("#mask").remove();
 	});
 }
-var ctr;
-var maxCtr;
-function fetchLineItems(orderId, i , len){
+
+function displayCombo(){
+	console.log("MaxCombo: " + bestCombo);
+	console.log("MaxComboCount: " + maxCount);
+	$('#orders2 .panel-body').text(bestCombo + ":" + maxCount);
+	$("#mask").fadeOut('slow',function(){
+		$("#mask").remove();
+	});
+}
+
+function fetchPopularLunch(orderId, i , len){
 	var cookies = str_obj(document.cookie);
 	// update line count 
 	ctr = i;
@@ -111,13 +129,63 @@ function fetchLineItems(orderId, i , len){
 				// console.log("MaxItem:" + maxItem); 
 			}
 			if( ctr == maxCtr){
-				displayMax();
+				displayMaxLunch();
 				itemCount = new Object();
 			}
 		}
 	});
 }
 
+function fetchPopularCombo(orderId, i , len) {
+	var cookies = str_obj(document.cookie);
+	// update line count 
+	ctr = i;
+	maxCtr = len;
+
+	$.ajax({
+		url: '/get.php?type=orders/'+ orderId +'/line_items&token='+cookies.access_token,
+		type:'GET',
+		beforeSend: function(request){
+			$("#login-btn").hide();
+			$("#loader").show();
+		},
+		success: function(items){
+			var listItems = [];
+			if("elements" in lineItems) {
+				for(var key in items["elements"]){
+				    listItems.push(items.elements[key].name);
+				}
+				listItems.sort();
+				for(var i = 0; i < listItems.length; i++){
+				    for(var j = i+1; j < listItems.length; j++){
+				        var tuple = listItems[i] + "," + listItems[j];
+				        if(popularComboMap.hasOwnProperty(tuple)){
+				            popularComboMap[tuple] = popularComboMap[tuple] + 1;
+				        }
+				        else{
+				            popularComboMap[tuple] = 1;
+				        }
+				        if(popularComboMap[tuple] > maxCount){
+				            maxCount = popularComboMap[tuple];
+				            bestCombo = tuple;
+				        }
+				    }
+				}
+			}
+			if( ctr == maxCtr){
+				displayCombo();
+				popularComboMap = new Object();
+			}
+		}
+	});
+}
+
+function getPeakHour() {
+    var date = new Date(1382086394000).toString();
+    var dateSplit = date.split(" ");
+    var time = parseInt(dateSplit[4]);
+    document.getElementById("demo").innerHTML = time;
+}
 
 function str_obj(str) {
 	str = str.split(';');
