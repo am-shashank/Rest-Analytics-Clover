@@ -83,7 +83,7 @@ function fetchLineItems(orderId, i , len){
 	// update line count 
 	ctr = i;
 	maxCtr = len;
-	console.log("in Ajax ctr: " + tempi);
+	console.log("in Ajax ctr: " + ctr);
 	$.ajax({
 		url: '/get.php?type=orders/'+ orderId +'/line_items&token='+cookies.access_token,
 		type:'GET',
