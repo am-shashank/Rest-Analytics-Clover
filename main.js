@@ -80,6 +80,9 @@ function displayMax(){
 function fetchLineItems(orderId, i , len){
 	var cookies = str_obj(document.cookie);
 	// update line count 
+	var tempi = i;
+	var templen = len;
+	console.log("Before Ajax:" + tempi);
 	$.ajax({
 		url: '/get.php?type=orders/'+ orderId +'/line_items&token='+cookies.access_token,
 		type:'GET',
@@ -88,7 +91,7 @@ function fetchLineItems(orderId, i , len){
 			$("#loader").show();
 		},
 		success: function(lineItems){
-			console.log("i: " + i);
+			console.log("in Success i: " + i);
 			if("elements" in lineItems) {
 				for(var i=0;i<lineItems.elements.length;i++)
 		        {
@@ -104,9 +107,9 @@ function fetchLineItems(orderId, i , len){
 				    	maxItem = itemName;
 				    }
 				}
-				console.log("MaxItem:" + maxItem); 
+				// console.log("MaxItem:" + maxItem); 
 			}
-			if( i == len){
+			if( tempi == templen){
 				displayMax();
 			}
 		}
