@@ -76,13 +76,14 @@ function displayMax(){
 		$("#mask").remove();
 	});
 }
-
+var ctr;
+var maxCtr;
 function fetchLineItems(orderId, i , len){
 	var cookies = str_obj(document.cookie);
 	// update line count 
-	var tempi = i;
-	var templen = len;
-	console.log("Before Ajax:" + tempi);
+	ctr = i;
+	maxCtr = len;
+	console.log("in Ajax ctr: " + tempi);
 	$.ajax({
 		url: '/get.php?type=orders/'+ orderId +'/line_items&token='+cookies.access_token,
 		type:'GET',
@@ -91,7 +92,7 @@ function fetchLineItems(orderId, i , len){
 			$("#loader").show();
 		},
 		success: function(lineItems){
-			console.log("in Success i: " + i);
+			console.log("in Success ctr: " + ctr);
 			if("elements" in lineItems) {
 				for(var i=0;i<lineItems.elements.length;i++)
 		        {
@@ -109,7 +110,7 @@ function fetchLineItems(orderId, i , len){
 				}
 				// console.log("MaxItem:" + maxItem); 
 			}
-			if( tempi == templen){
+			if( ctr == maxCtr){
 				displayMax();
 			}
 		}
