@@ -112,6 +112,7 @@ function fetchLineItems(orderId, i , len){
 			}
 			if( ctr == maxCtr){
 				displayMax();
+				itemCount = new Object();
 			}
 		}
 	});
