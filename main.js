@@ -68,7 +68,7 @@ function fetchAllOrders(func){
 			$("#mask").show();
 		},
 		success: function(orders){
-			if(elements in orders) {
+			if("elements" in orders) {
 				for(var i=0; i<orders.elements.length;i++){
 					var orderid = orders.elements[i].id;
 					// fetch line items for every order
