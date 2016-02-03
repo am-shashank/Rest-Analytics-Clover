@@ -181,12 +181,12 @@ function fetchPopularCombo(orderId, i , len) {
 	});
 }
 
-function getPeakHour() {
-    var date = new Date(1382086394000).toString();
-    var dateSplit = date.split(" ");
-    var time = parseInt(dateSplit[4]);
-    document.getElementById("demo").innerHTML = time;
-}
+// function getPeakHour() {
+//     var date = new Date(1382086394000).toString();
+//     var dateSplit = date.split(" ");
+//     var time = parseInt(dateSplit[4]);
+//     document.getElementById("demo").innerHTML = time;
+// }
 
 function str_obj(str) {
 	str = str.split(';');
