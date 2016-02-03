@@ -30,8 +30,8 @@
 	</nav>
 	<ul class="nav nav-tabs" id="main-tabs">
 		<li class=""><a href="#customers" data-toggle="tab" aria-expanded="false">Customers</a></li>
-		<li class=""><a href="#orders1" data-toggle="tab" aria-expanded="false">Orders (Best lunch Order)</a></li>
-		<li class=""><a href="#orders2" data-toggle="tab" aria-expanded="false">Orders (Time)</a></li>
+		<li class=""><a href="#orders1" data-toggle="tab" aria-expanded="false">Most ordered Lunch</a></li>
+		<li class=""><a href="#orders2" data-toggle="tab" aria-expanded="false">Most Popular Combo</a></li>
 	</ul>
 	<div id="myTabContent" class="tab-content">
 		<div id="mask">
