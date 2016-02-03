@@ -61,32 +61,23 @@ function fetchAllOrders(){
 			for(var i=0; i<orders.elements.length;i++){
 				var orderid = orders.elements[i].id;
 				// fetch line items for every order
-				fetchLineItems(orderid);
+				fetchLineItems(orderid, i, orders.elements.length - 1);
 			}
-		},
-		complete: function(data) {
-			// console.log(itemCount);
-			// var maxCount = 0;
-			// var maxItem = "";
-			// for(var k in itemCount){
-			// 	if(k.count>maxCount) {
-			// 		console.log(k.count+":"+k.name);
-			// 		maxCount = k.count;
-			// 		maxItem = k.name;
-			// 	}
-			// }
-			console.log("MaxItem: " + maxItem);
-			console.log("MaxItemCount: " + maxCount);
-			$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
-			$("#mask").fadeOut('slow',function(){
-				$("#mask").remove();
-			});
+
 		}
 	});
-	
 }
 
-function fetchLineItems(orderId){
+function displayMax(){
+	console.log("MaxItem: " + maxItem);
+	console.log("MaxItemCount: " + maxCount);
+	$('#orders1 .panel-body').text(maxItem + ":" + maxCount);
+	$("#mask").fadeOut('slow',function(){
+		$("#mask").remove();
+	});
+}
+
+function fetchLineItems(orderId, i , len){
 	var cookies = str_obj(document.cookie);
 	// update line count 
 	$.ajax({
@@ -102,21 +93,20 @@ function fetchLineItems(orderId){
 		        {
 				    // var itemId = lineItems.elements[i].id;
 				    var itemName = lineItems.elements[i].name;
-			        // console.log("itemID:" + itemId);
-			        // console.log("itemName:" + itemName);
 				    if (itemName in itemCount) {		
 				    	itemCount[itemName] = itemCount[itemName] + 1;
 				    } else {
 			            itemCount[itemName] = 1;
 				    }
-				    // console.log(itemCount);
-				    // update the popular item
 				    if(itemCount[itemName] > maxCount) {
 				    	maxCount = itemCount[itemName];
 				    	maxItem = itemName;
 				    }
 				}
 				console.log("MaxItem:" + maxItem); 
+			}
+			if( i == len){
+				displayMax();
 			}
 		}
 	});
