@@ -88,6 +88,7 @@ function fetchLineItems(orderId, i , len){
 			$("#loader").show();
 		},
 		success: function(lineItems){
+			console.log("i: " + i);
 			if("elements" in lineItems) {
 				for(var i=0;i<lineItems.elements.length;i++)
 		        {
