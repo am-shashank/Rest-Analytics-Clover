@@ -151,7 +151,7 @@ function fetchPopularCombo(orderId, i , len) {
 		},
 		success: function(items){
 			var listItems = [];
-			if("elements" in lineItems) {
+			if("elements" in items) {
 				for(var key in items["elements"]){
 				    listItems.push(items.elements[key].name);
 				}
